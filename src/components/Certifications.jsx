@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaCertificate, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaCertificate } from 'react-icons/fa';
 import Card from './ui/Card';
 import Button from './ui/Button';
 
@@ -58,7 +58,7 @@ const Certifications = () => {
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="h-[3px] w-20 bg-gradient-to-r from-accent-cyan to-accent-purple mx-auto mt-4 origin-left"
+            className="h-[3px] w-20 bg-accent-cyan mx-auto mt-4 origin-left shadow-[0_0_8px_rgba(6,182,212,0.4)]"
           />
         </div>
 
@@ -104,24 +104,6 @@ const Certifications = () => {
                   ))}
                 </div>
 
-              </div>
-
-              {/* Verify Button */}
-              <div className="pt-6 mt-6 border-t border-white/5">
-                <a 
-                  href={cert.verifyUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="w-full inline-block"
-                >
-                  <Button 
-                    variant="secondary" 
-                    className="w-full gap-2 text-sm justify-center py-2.5 border border-white/10 hover:border-accent-cyan/30"
-                  >
-                    Verify Credentials
-                    <FaExternalLinkAlt className="text-xs" />
-                  </Button>
-                </a>
               </div>
             </Card>
           ))}

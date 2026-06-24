@@ -69,7 +69,7 @@ const About = () => {
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="h-[3px] w-20 bg-gradient-to-r from-accent-cyan to-accent-purple mx-auto mt-4 origin-left"
+            className="h-[3px] w-20 bg-accent-cyan mx-auto mt-4 origin-left shadow-[0_0_8px_rgba(6,182,212,0.4)]"
           />
         </div>
 

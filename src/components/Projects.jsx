@@ -10,7 +10,7 @@ const projects = [
     description: "A comprehensive health tracking app featuring user authentication, calorie monitoring, customized workout schedules, dynamic progress dashboards, and MongoDB database integration.",
     image: "/assets/project-fitness.png",
     tech: ["ReactJS", "NodeJS", "NestJS", "MongoDB", "Framer Motion"],
-    github: "https://github.com/Dhushyanthan005/fitness-tracker",
+    github: "https://github.com/Dhushyanthan005/Fitnesss-Tracker-frontend.git",
     live: "https://fitness-tracker-demo.vercel.app/",
     glow: "cyan"
   },
@@ -34,109 +34,66 @@ const projects = [
   }
 ];
 
-const TiltCard = ({ project, delay }) => {
-  const cardRef = useRef(null);
-
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const card = cardRef.current;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    
-    // Tilt angle multiplier (smaller is less tilt)
-    const rotateX = -(y / (rect.height / 2)) * 8;
-    const rotateY = (x / (rect.width / 2)) * 8;
-
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
-  };
-
-  const handleMouseLeave = () => {
-    if (!cardRef.current) return;
-    const card = cardRef.current;
-    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-  };
-
+const ProjectCard = ({ project, delay }) => {
   return (
-    <div 
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="transition-transform duration-200 ease-out"
-      style={{ transformStyle: 'preserve-3d' }}
+    <Card 
+      glowColor={project.glow}
+      delay={delay}
+      hoverGlow={true}
+      className="h-full flex flex-col p-0 bg-background-secondary/90 border border-white/5 overflow-hidden transition-all duration-300 relative"
     >
-      <Card 
-        ref={cardRef}
-        glowColor={project.glow}
-        delay={delay}
-        hoverGlow={true}
-        className="h-full flex flex-col p-0 bg-background-secondary/90 border border-white/5 overflow-hidden transition-all duration-300 relative"
-      >
-        {/* Project Image Panel */}
-        <div className="h-52 w-full overflow-hidden relative group">
-          <div className="absolute inset-0 bg-gradient-to-t from-background-secondary via-transparent to-transparent z-10 pointer-events-none" />
-          <img 
-            src={project.image} 
-            alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-            onError={(e) => {
-              // Fallback image if asset loading fails
-              e.target.src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80";
-            }}
-          />
-          <div className="absolute top-4 left-4 z-20">
-            <span className={`px-3 py-1 text-[10px] font-mono font-bold uppercase rounded-full tracking-wider ${
-              project.glow === 'cyan' 
-                ? 'bg-accent-cyan/20 border border-accent-cyan/30 text-accent-cyan' 
-                : 'bg-accent-purple/20 border border-accent-purple/30 text-accent-purple'
-            }`}>
-              Featured Project
-            </span>
-          </div>
+      {/* Content Box */}
+      <div className="p-6 flex flex-col flex-grow space-y-4">
+        <div className="flex items-center">
+          <span className={`px-3 py-1 text-[10px] font-mono font-bold uppercase rounded-full tracking-wider ${
+            project.glow === 'cyan' 
+              ? 'bg-accent-cyan/20 border border-accent-cyan/30 text-accent-cyan' 
+              : 'bg-accent-purple/20 border border-accent-purple/30 text-accent-purple'
+          }`}>
+            Featured Project
+          </span>
         </div>
 
-        {/* Content Box */}
-        <div className="p-6 flex flex-col flex-grow space-y-4">
-          <h3 className="text-xl font-bold font-heading text-white tracking-tight hover:text-accent-cyan transition-colors">
-            {project.title}
-          </h3>
-          
-          <p className="text-white/60 text-sm leading-relaxed font-sans flex-grow">
-            {project.description}
-          </p>
+        <h3 className="text-xl font-bold font-heading text-white tracking-tight hover:text-accent-cyan transition-colors">
+          {project.title}
+        </h3>
+        
+        <p className="text-white/60 text-sm leading-relaxed font-sans flex-grow">
+          {project.description}
+        </p>
 
-          {/* Tech Badges Row */}
-          <div className="flex flex-wrap gap-2 pt-2">
-            {project.tech.map((t, idx) => (
-              <Badge key={idx} variant={project.glow === 'cyan' ? 'cyan' : 'purple'}>
-                {t}
-              </Badge>
-            ))}
-          </div>
-
-          {/* Card Links Footer */}
-          <div className="flex items-center gap-4 pt-4 border-t border-white/5 mt-auto">
-            <a 
-              href={project.github} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="flex items-center gap-2 text-white/70 hover:text-accent-cyan text-sm font-medium transition-colors group"
-            >
-              <FaGithub className="text-lg group-hover:scale-110 transition-transform" />
-              Codebase
-            </a>
-            <a 
-              href={project.live} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="flex items-center gap-2 text-white/70 hover:text-accent-cyan text-sm font-medium transition-colors group"
-            >
-              <FaExternalLinkAlt className="text-sm group-hover:scale-110 transition-transform" />
-              Live Demo
-            </a>
-          </div>
+        {/* Tech Badges Row */}
+        <div className="flex flex-wrap gap-2 pt-2">
+          {project.tech.map((t, idx) => (
+            <Badge key={idx} variant={project.glow === 'cyan' ? 'cyan' : 'purple'}>
+              {t}
+            </Badge>
+          ))}
         </div>
-      </Card>
-    </div>
+
+        {/* Card Links Footer */}
+        <div className="flex items-center gap-3 pt-4 border-t border-white/5 mt-auto w-full">
+          <a 
+            href={project.github} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 bg-slate-900/50 hover:bg-slate-800/80 text-white/80 hover:text-white hover:border-accent-cyan/40 transition-all duration-300 hover:scale-[1.03] text-xs font-semibold cursor-pointer"
+          >
+            <FaGithub className="text-base" />
+            Codebase
+          </a>
+          <a 
+            href={project.live} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-accent-cyan text-slate-950 hover:brightness-110 font-bold transition-all duration-300 hover:scale-[1.03] text-xs shadow-[0_0_12px_rgba(253,224,71,0.15)] cursor-pointer"
+          >
+            <FaExternalLinkAlt className="text-xs" />
+            Live Demo
+          </a>
+        </div>
+      </div>
+    </Card>
   );
 };
 
@@ -175,14 +132,14 @@ const Projects = () => {
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="h-[3px] w-20 bg-gradient-to-r from-accent-cyan to-accent-purple mx-auto mt-4 origin-left"
+            className="h-[3px] w-20 bg-accent-cyan mx-auto mt-4 origin-left shadow-[0_0_8px_rgba(6,182,212,0.4)]"
           />
         </div>
 
         {/* Project Card Showcase */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, idx) => (
-            <TiltCard 
+            <ProjectCard 
               key={idx} 
               project={project} 
               delay={idx * 0.15} 

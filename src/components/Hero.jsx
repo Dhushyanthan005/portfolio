@@ -138,9 +138,9 @@ const Hero = () => {
               Dhushyanthan M
             </motion.h1>
             <div className="h-10 lg:h-12 flex items-center">
-              <h2 className="text-xl lg:text-3xl font-bold font-heading text-accent-cyan text-glow-cyan">
+              <h2 className="text-xl lg:text-3xl font-bold font-heading text-white">
                 {displayText}
-                <span className="animate-pulse ml-0.5 border-r-2 border-accent-cyan h-6 inline-block" />
+                <span className="animate-pulse ml-0.5 border-r-2 border-white h-6 inline-block" />
               </h2>
             </div>
           </div>

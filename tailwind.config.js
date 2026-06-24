@@ -8,12 +8,12 @@ export default {
     extend: {
       colors: {
         background: {
-          primary: '#0f172a',
-          secondary: '#111827',
+          primary: '#121214',
+          secondary: '#1a1a1e',
         },
         accent: {
-          cyan: '#06b6d4',
-          purple: '#8b5cf6',
+          cyan: '#fde047',
+          purple: '#f59e0b',
         }
       },
       fontFamily: {

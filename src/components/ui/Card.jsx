@@ -12,7 +12,7 @@ const Card = React.forwardRef(({
 }, ref) => {
   const glowClasses = {
     cyan: 'glass-panel-glow',
-    purple: 'glass-card-purple',
+    purple: 'glass-card-orange',
     green: 'glass-card-green'
   };
 

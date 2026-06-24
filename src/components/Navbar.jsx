@@ -79,7 +79,7 @@ const Navbar = () => {
       {/* Scroll Progress Indicator */}
       <div className="absolute top-0 left-0 w-full h-[3px] bg-slate-900/50">
         <div 
-          className="h-full bg-gradient-to-r from-accent-cyan to-accent-purple transition-all duration-75"
+          className="h-full bg-accent-cyan shadow-[0_0_8px_rgba(6,182,212,0.6)] transition-all duration-75"
           style={{ width: `${scrollProgress}%` }}
         />
       </div>
@@ -89,30 +89,30 @@ const Navbar = () => {
         <a 
           href="#hero" 
           onClick={(e) => handleLinkClick(e, 'hero')}
-          className="text-xl font-bold tracking-wider font-heading bg-gradient-to-r from-accent-cyan to-accent-purple bg-clip-text text-transparent hover:scale-105 transition-transform"
+          className="text-xl font-bold tracking-wider font-heading text-accent-cyan text-glow-cyan hover:scale-105 transition-transform"
         >
           DHUSHYANTHAN M.
         </a>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center space-x-1">
+        <nav className="hidden lg:flex items-center space-x-1 bg-slate-950/40 p-1.5 rounded-full border border-white/5 backdrop-blur-sm">
           {navLinks.map((link) => (
             <a
               key={link.id}
               href={`#${link.id}`}
               onClick={(e) => handleLinkClick(e, link.id)}
               className={cn(
-                'px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 relative',
+                'px-3.5 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 relative',
                 activeSection === link.id 
-                  ? 'text-accent-cyan' 
-                  : 'text-white/70 hover:text-white hover:bg-white/5'
+                  ? 'text-accent-cyan font-bold' 
+                  : 'text-white/70 hover:text-white'
               )}
             >
-              {link.name}
+              <span className="relative z-10">{link.name}</span>
               {activeSection === link.id && (
                 <motion.span 
                   layoutId="activeNavIndicator"
-                  className="absolute bottom-0 left-4 right-4 h-[2px] bg-accent-cyan"
+                  className="absolute inset-0 bg-accent-cyan/10 border border-accent-cyan/20 rounded-full shadow-[0_0_12px_rgba(6,182,212,0.15)]"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
