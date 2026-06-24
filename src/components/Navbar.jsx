@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HiMenu, HiX } from 'react-icons/hi';
+import { HiMenu, HiX, HiSun, HiMoon } from 'react-icons/hi';
 import { cn } from '../utils/cn';
 
 const navLinks = [
@@ -19,6 +19,18 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+ 
+  // Sync theme class to root html element
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (theme === 'light') {
+      root.classList.add('light-mode');
+    } else {
+      root.classList.remove('light-mode');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   // Monitor scroll for styling and progress bar
   useEffect(() => {
@@ -95,39 +107,121 @@ const Navbar = () => {
         </a>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center space-x-1 bg-slate-950/40 p-1.5 rounded-full border border-white/5 backdrop-blur-sm">
-          {navLinks.map((link) => (
-            <a
-              key={link.id}
-              href={`#${link.id}`}
-              onClick={(e) => handleLinkClick(e, link.id)}
+        <div className="hidden lg:flex items-center space-x-4">
+          <nav className="flex items-center space-x-1 bg-slate-950/40 p-1.5 rounded-full border border-white/5 backdrop-blur-sm">
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => handleLinkClick(e, link.id)}
+                className={cn(
+                  'px-3.5 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 relative',
+                  activeSection === link.id 
+                    ? 'text-accent-cyan font-bold' 
+                    : 'text-white/70 hover:text-white'
+                )}
+              >
+                <span className="relative z-10">{link.name}</span>
+                {activeSection === link.id && (
+                  <motion.span 
+                    layoutId="activeNavIndicator"
+                    className="absolute inset-0 bg-accent-cyan/10 border border-accent-cyan/20 rounded-full shadow-[0_0_12px_rgba(6,182,212,0.15)]"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </a>
+            ))}
+          </nav>
+          
+          {/* Theme Switcher Pill */}
+          <div className="flex items-center bg-slate-950/40 p-1 rounded-full border border-white/5 backdrop-blur-sm relative">
+            <button
+              onClick={() => setTheme('light')}
               className={cn(
-                'px-3.5 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 relative',
-                activeSection === link.id 
-                  ? 'text-accent-cyan font-bold' 
-                  : 'text-white/70 hover:text-white'
+                'px-3.5 py-1.5 text-xs font-semibold rounded-full transition-colors duration-300 relative z-10 flex items-center gap-1.5 cursor-pointer',
+                theme === 'light' ? 'text-slate-950 font-bold' : 'text-white/70 hover:text-white'
               )}
+              aria-label="Light Mode"
             >
-              <span className="relative z-10">{link.name}</span>
-              {activeSection === link.id && (
-                <motion.span 
-                  layoutId="activeNavIndicator"
-                  className="absolute inset-0 bg-accent-cyan/10 border border-accent-cyan/20 rounded-full shadow-[0_0_12px_rgba(6,182,212,0.15)]"
+              <HiSun className="text-sm" />
+              <span>Light</span>
+              {theme === 'light' && (
+                <motion.span
+                  layoutId="desktopThemeIndicator"
+                  className="absolute inset-0 bg-accent-cyan rounded-full shadow-[0_0_12px_rgba(253,224,71,0.25)] -z-10"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
-            </a>
-          ))}
-        </nav>
+            </button>
+            <button
+              onClick={() => setTheme('dark')}
+              className={cn(
+                'px-3.5 py-1.5 text-xs font-semibold rounded-full transition-colors duration-300 relative z-10 flex items-center gap-1.5 cursor-pointer',
+                theme === 'dark' ? 'text-slate-950 font-bold' : 'text-white/70 hover:text-white'
+              )}
+              aria-label="Dark Mode"
+            >
+              <HiMoon className="text-sm" />
+              <span>Dark</span>
+              {theme === 'dark' && (
+                <motion.span
+                  layoutId="desktopThemeIndicator"
+                  className="absolute inset-0 bg-accent-cyan rounded-full shadow-[0_0_12px_rgba(253,224,71,0.25)] -z-10"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+            </button>
+          </div>
+        </div>
 
-        {/* Mobile Navigation Trigger */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden text-white/90 hover:text-white p-2 focus:outline-none cursor-pointer"
-          aria-label="Toggle navigation menu"
-        >
-          {mobileMenuOpen ? <HiX className="text-2xl" /> : <HiMenu className="text-2xl" />}
-        </button>
+        {/* Mobile Navigation Trigger & Theme Toggle */}
+        <div className="lg:hidden flex items-center space-x-2">
+          {/* Mobile Theme Switcher Pill */}
+          <div className="flex items-center bg-slate-950/40 p-1 rounded-full border border-white/5 backdrop-blur-sm relative">
+            <button
+              onClick={() => setTheme('light')}
+              className={cn(
+                'p-1.5 rounded-full transition-colors duration-300 relative z-10 flex items-center justify-center cursor-pointer',
+                theme === 'light' ? 'text-slate-950' : 'text-white/70 hover:text-white'
+              )}
+              aria-label="Light Mode"
+            >
+              <HiSun className="text-base" />
+              {theme === 'light' && (
+                <motion.span
+                  layoutId="mobileThemeIndicator"
+                  className="absolute inset-0 bg-accent-cyan rounded-full shadow-[0_0_12px_rgba(253,224,71,0.25)] -z-10"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+            </button>
+            <button
+              onClick={() => setTheme('dark')}
+              className={cn(
+                'p-1.5 rounded-full transition-colors duration-300 relative z-10 flex items-center justify-center cursor-pointer',
+                theme === 'dark' ? 'text-slate-950' : 'text-white/70 hover:text-white'
+              )}
+              aria-label="Dark Mode"
+            >
+              <HiMoon className="text-base" />
+              {theme === 'dark' && (
+                <motion.span
+                  layoutId="mobileThemeIndicator"
+                  className="absolute inset-0 bg-accent-cyan rounded-full shadow-[0_0_12px_rgba(253,224,71,0.25)] -z-10"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+            </button>
+          </div>
+
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="text-white/90 hover:text-white p-2 focus:outline-none cursor-pointer"
+            aria-label="Toggle navigation menu"
+          >
+            {mobileMenuOpen ? <HiX className="text-2xl" /> : <HiMenu className="text-2xl" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer Panel */}

@@ -169,3 +169,141 @@
   width: 100%;
   height: 100%;
 }
+
+/* Light Mode Overrides */
+.light-mode {
+  background-color: #f8fafc;
+  color: #1e293b;
+}
+
+.light-mode body {
+  background-color: #f8fafc;
+  color: #1e293b;
+}
+
+.light-mode .bg-background-primary {
+  background-color: #f8fafc !important;
+}
+
+.light-mode .bg-background-secondary {
+  background-color: #ffffff !important;
+}
+
+.light-mode .text-white {
+  color: #1e293b !important;
+}
+
+.light-mode .text-white\/90,
+.light-mode .text-white\/80,
+.light-mode .text-white\/70 {
+  color: #334155 !important;
+}
+
+.light-mode .text-white\/60,
+.light-mode .text-white\/50,
+.light-mode .text-white\/40,
+.light-mode .text-white\/30 {
+  color: #64748b !important;
+}
+
+.light-mode .border-white\/5,
+.light-mode .border-white\/10,
+.light-mode .border-white\/20 {
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+.light-mode .bg-slate-900\/60,
+.light-mode .bg-slate-900\/50,
+.light-mode .bg-slate-900 {
+  background-color: #f1f5f9 !important;
+  color: #1e293b !important;
+}
+
+.light-mode .glass-panel {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+  color: #1e293b !important;
+}
+
+.light-mode .glass-panel-glow {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(253, 224, 71, 0.4) !important;
+  box-shadow: 0 8px 32px 0 rgba(253, 224, 71, 0.06) !important;
+  color: #1e293b !important;
+}
+
+.light-mode .glass-panel-glow:hover {
+  border-color: rgba(253, 224, 71, 0.8) !important;
+  box-shadow: 0 8px 32px 0 rgba(253, 224, 71, 0.12) !important;
+}
+
+.light-mode .glass-card-orange {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(245, 158, 11, 0.4) !important;
+  box-shadow: 0 8px 32px 0 rgba(245, 158, 11, 0.06) !important;
+  color: #1e293b !important;
+}
+
+.light-mode .glass-card-orange:hover {
+  border-color: rgba(245, 158, 11, 0.8) !important;
+  box-shadow: 0 8px 32px 0 rgba(245, 158, 11, 0.12) !important;
+}
+
+.light-mode .glass-card-green {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+  box-shadow: 0 8px 32px 0 rgba(16, 185, 129, 0.06) !important;
+  color: #1e293b !important;
+}
+
+.light-mode .glass-card-green:hover {
+  border-color: rgba(16, 185, 129, 0.8) !important;
+  box-shadow: 0 8px 32px 0 rgba(16, 185, 129, 0.12) !important;
+}
+
+.light-mode .text-accent-cyan {
+  color: #b45309 !important; /* Darker amber for readability */
+}
+
+.light-mode .bg-accent-cyan {
+  background-color: #f59e0b !important; /* Amber yellow background for readability */
+  color: #121214 !important; /* Dark charcoal text for high contrast */
+}
+
+.light-mode .text-accent-purple {
+  color: #c2410c !important; /* Darker orange for readability */
+}
+
+/* Scroll Progress Bar in Light Mode */
+.light-mode .h-full.bg-accent-cyan {
+  background-color: #fbbf24 !important;
+}
+
+/* Background grid in Light Mode */
+.light-mode .grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px) !important;
+}
+
+/* Background animated bubbles in Light mode */
+.light-mode .mesh-circle-1 {
+  background: radial-gradient(circle, rgba(253, 224, 71, 0.1) 0%, rgba(0, 0, 0, 0) 70%) !important;
+}
+.light-mode .mesh-circle-2 {
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, rgba(0, 0, 0, 0) 70%) !important;
+}
+.light-mode .mesh-circle-3 {
+  background: radial-gradient(circle, rgba(253, 224, 71, 0.05) 0%, rgba(0, 0, 0, 0) 70%) !important;
+}
+
+/* Orbit background glow behind profile */
+.light-mode .bg-gradient-to-tr.from-accent-cyan\/20.to-accent-purple\/20 {
+  background: rgba(253, 224, 71, 0.1) !important;
+}
+
+/* Tech icons orbiting buttons in Light mode */
+.light-mode .glass-panel.p-3 {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+}
